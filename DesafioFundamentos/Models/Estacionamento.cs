@@ -17,18 +17,9 @@ namespace DesafioFundamentos.Models
         }
 
         #nullable enable
-        private string VerificarNullish (string? texto) {
-        #nullable disable
-            if (String.IsNullOrWhiteSpace(texto?.Trim())) {
-                throw new ArgumentException("Insira um valor!");
-            }
-            return texto!;
-        }
-
-        #nullable enable
         private string VerificarEFormatarPlaca(string? placa) {
         #nullable disable
-            switch (this.VerificarNullish(placa).ToUpper())
+            switch (Utils.VerificarNullish(placa).ToUpper())
             {
                 case var oldFormat when regexAntigo.IsMatch(oldFormat!):
                     if (!oldFormat.Contains('-')) {
@@ -72,7 +63,7 @@ namespace DesafioFundamentos.Models
                 string entradaHoras = "";
                 
                 try {
-                    entradaHoras = this.VerificarNullish(Console.ReadLine());
+                    entradaHoras = Utils.VerificarNullish(Console.ReadLine());
                 } catch (Exception err) {
                     Console.WriteLine(err.Message);
                     return;
