@@ -12,7 +12,7 @@ namespace DesafioFundamentos.Models
         // Baseado em https://stackoverflow.com/a/35554808
         public static void ColetarEConverterValor<T> (out T valor, string mensagem) {
             bool sucesso = false;
-            valor = default(T);
+            valor = default;
 
             while (!sucesso) {
                 TypeConverter conversor = TypeDescriptor.GetConverter(typeof(T));
