@@ -39,7 +39,7 @@ namespace DesafioFundamentos.Models
 
             try {
                 string entrada = Console.ReadLine();
-                string placa = this.VerificarEFormatarPlaca(entrada);
+                string placa = VerificarEFormatarPlaca(entrada);
 
                 if (veiculos.Any(x => x == placa)) {
                     throw new Exception($"Já existe um carro com a seguinte placa estacionado: {placa}");
@@ -51,22 +51,26 @@ namespace DesafioFundamentos.Models
         }
 
         public void RemoverVeiculo() {
-            Console.WriteLine("Digite a placa do veículo a ser removido:");
+            try {
+                Console.WriteLine("Digite a placa do veículo a ser removido:");
 
-            string entrada = Console.ReadLine();
-            string placa = this.VerificarEFormatarPlaca(entrada);
+                string entrada = Console.ReadLine();
+                string placa = VerificarEFormatarPlaca(entrada);
 
-            // Verifica se o veículo existe
-            if (veiculos.Any(x => x == placa)) {
-                Utils.ColetarEConverterValor(out int horas, "Digite a quantidade de horas que o veículo permaneceu estacionado:");
+                // Verifica se o veículo existe
+                if (veiculos.Any(x => x == placa)) {
+                    Utils.ColetarEConverterValor(out int horas, "Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
-                decimal valorTotal = precoInicial + precoPorHora * horas; 
+                    decimal valorTotal = precoInicial + precoPorHora * horas; 
 
-                veiculos.Remove(placa);
+                    veiculos.Remove(placa);
 
-                Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
-            } else {
-                Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente.");
+                    Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+                } else {
+                    Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente.");
+                }
+            } catch (Exception err) {
+                Console.WriteLine(err.Message);
             }
         }
 
